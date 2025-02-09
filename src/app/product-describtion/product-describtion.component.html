@@ -1,0 +1,156 @@
+<div class="container my-5">
+  <div class="row">
+    <!-- Product Image -->
+    <div class="col-md-6">
+      <img
+        [src]="productItem.thumbnail"
+        alt="{{ productItem.title }}"
+        class="img-fluid rounded shadow"
+      />
+    </div>
+
+    <!-- Product productItem -->
+    <div class="col-md-6">
+      <div class="card border-0 shadow-sm p-4">
+        <h1 class="fw-bold display-5 mb-3">{{ productItem.title }}</h1>
+        <hr />
+        <p class="text-muted lead mb-4">{{ productItem.description }}</p>
+        <hr />
+        <div class="mb-3">
+          <strong>Category: </strong>
+          <span class="badge bg-success text-light fs-6">{{
+            productItem.category
+          }}</span>
+        </div>
+        <hr />
+
+        <div class="mb-3">
+          <strong>Brand:</strong>
+          <span class="text-primary fw-medium">{{ productItem.brand }}</span>
+        </div>
+        <hr />
+
+        <div class="mb-3">
+          <strong>Price:</strong>
+          <span class="text-danger fw-bold fs-4">${{ productItem.price }}</span>
+        </div>
+        <hr />
+
+        <div class="mb-3">
+          <strong>Rating:</strong>
+          <span
+            *ngFor="let star of getStars(productItem.rating)"
+            class="text-warning"
+            >⭐</span
+          >
+          <span class="text-success fw-medium"
+            >({{ productItem.rating }} / 5)</span
+          >
+        </div>
+        <hr />
+
+        <div class="mb-3">
+          <strong>Stock:</strong>
+          <span
+            class="badge fs-6"
+            [ngClass]="{
+              'bg-success': productItem.stock > 10,
+              'bg-warning': productItem.stock <= 10 && productItem.stock > 0,
+              'bg-danger': productItem.stock === 0
+            }"
+          >
+            {{ productItem.availabilityStatus }}
+          </span>
+        </div>
+        <hr />
+
+        <div class="mb-3">
+          <strong>Dimensions:</strong>
+          <span class="text-muted">
+            {{ productItem.dimensions.width }} x
+            {{ productItem.dimensions.height }} x
+            {{ productItem.dimensions.depth }} cm
+          </span>
+        </div>
+        <hr />
+
+        <div class="mb-3">
+          <strong>Weight:</strong>
+          <span class="text-muted">{{ productItem.weight }} g</span>
+        </div>
+        <hr />
+
+        <div class="mb-3">
+          <strong>Warranty:</strong>
+          <span class="text-muted">{{ productItem.warrantyInformation }}</span>
+        </div>
+        <hr />
+
+        <div class="mb-3">
+          <strong>Shipping Information:</strong>
+          <span class="text-muted">{{ productItem.shippingInformation }}</span>
+        </div>
+        <hr />
+
+        <div class="mb-3">
+          <strong>Return Policy:</strong>
+          <span class="text-muted">{{ productItem.returnPolicy }}</span>
+        </div>
+        <hr />
+        <div class="mb-4">
+          @if (productItem.discountPercentage > 0) {
+              <h4 class="text-danger">
+                  <span class="text-decoration-line-through me-2">{{ productItem.price | currency }}</span>
+                    <span>${{ productItem.price | discount: productItem.discountPercentage }}</span>
+              </h4>
+              <p class="text-success">({{ productItem.discountPercentage }}% off)</p>
+          } @else {
+              <h4 class="text-primary">${{ productItem.price | currency }}</h4>
+          }
+      </div>
+
+        <button
+          class="btn btn-primary btn-lg w-100 mt-3 py-2 fw-bold"
+          [disabled]="productItem.stock === 0"
+          [ngClass]="{ 'btn-secondary': productItem.stock === 0 }"
+        >
+          {{ productItem.stock === 0 ? "Out of Stock" : "Add to Cart" }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reviews Section -->
+  <div class="row mt-5">
+    <h3 class="fw-bold mb-4 display-6">Customer Reviews</h3>
+
+    <div
+      class="col-md-12"
+      *ngFor="let review of productItem.reviews"
+      class="border-bottom pb-3 mb-3"
+    >
+      <div class="d-flex align-items-center mb-2">
+        <div
+          class="avatar bg-primary text-white rounded-circle me-3"
+          style="
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+          "
+        >
+          {{ review.reviewerName.charAt(0) }}
+        </div>
+        <strong>{{ review.reviewerName }}</strong>
+      </div>
+      <p class="text-muted mb-2">
+        <i>{{ review.comment }}</i>
+      </p>
+      <div>
+        <span *ngFor="let star of getStars(review.rating)" class="text-warning"
+          >⭐</span
+        >
+      </div>
+    </div>
+  </div>
+</div>

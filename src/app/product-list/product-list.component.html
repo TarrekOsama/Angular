@@ -1,0 +1,18 @@
+<div class="container my-4">
+  <h1 class="mb-4 text-center display-4 fw-bold text-primary">
+    Welcome to Our Shopping Website
+  </h1>
+  <p class="text-center lead mb-5">
+    Start browsing our amazing collection of products!
+  </p>
+  <div class="row g-4">
+    @for (product of products; track product.id) {
+      <div class="col-12 col-md-6 col-lg-4">
+        <app-product-card
+          [productItem]="product"
+          class="card h-100 shadow-sm"
+        ></app-product-card>
+      </div>
+    }
+  </div>
+</div>
