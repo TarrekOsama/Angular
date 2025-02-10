@@ -1,1 +1,76 @@
-<p>login works!</p>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <!-- Login Form Card -->
+        <div class="card p-4 shadow">
+          <h2 class="text-center mb-4 text-primary">Login Form</h2>
+          <form #loginForm="ngForm" (ngSubmit)="handleFormSubmit(loginForm)">
+            <!-- Email Field -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Email:</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                [(ngModel)]="user.email"
+                required
+                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                #email="ngModel"
+                class="form-control"
+                placeholder="Enter your email"
+
+                [ngClass]="{ 'is-invalid': email.touched && email.invalid }"
+              />
+              <!-- Validation Messages for Email -->
+              @if(email.touched && email.invalid) {
+                @if(email.hasError('required')) {
+                  <div class="invalid-feedback">Email is required.</div>
+                }
+                @if(email.hasError('pattern')) {
+                  <div class="invalid-feedback">Invalid email format.</div>
+                }
+              }
+            </div>
+  
+            <!-- Password Field -->
+            <div class="mb-3">
+              <label for="password" class="form-label">Password:</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                [(ngModel)]="user.password"
+                required
+                minlength="6"
+                #password="ngModel"
+                class="form-control"
+                placeholder="Enter your Password"
+
+                [ngClass]="{ 'is-invalid': password.touched && password.invalid }"
+              />
+              <!-- Validation Messages for Password -->
+              @if(password.touched && password.invalid) {
+                @if(password.hasError('required')) {
+                  <div class="invalid-feedback">Password is required.</div>
+                }
+                @if(password.hasError('minlength')) {
+                  <div class="invalid-feedback">
+                    Password must be at least 6 characters long.
+                  </div>
+                }
+              }
+            </div>
+  
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary w-100 mb-3" [disabled]="loginForm.invalid">Login</button>
+          </form>
+  
+          <!-- Register Link -->
+          <div class="text-center">
+            <span>Don't have an account? </span>
+            <a class="nav-link text-dark fw-semibold d-inline" routerLink="/register"> Register!</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
