@@ -1,1 +1,159 @@
-<p>register works!</p>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <!-- Register Form Card -->
+      <div class="card p-4 shadow border-0">
+        <h2 class="text-center mb-4 text-primary">Register Form</h2>
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <!-- Name Field -->
+          <div class="mb-3">
+            <label for="name" class="form-label fw-medium">Name:</label>
+            <input
+              type="text"
+              id="name"
+              formControlName="name"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid':
+                  formControls['name'].touched && formControls['name'].invalid
+              }"
+              placeholder="Enter your name"
+            />
+            <!-- Validation Messages for Name -->
+            @if(formControls['name'].touched && formControls['name'].invalid) {
+            @if(formControls['name'].hasError('required')) {
+            <div class="invalid-feedback">Name is required.</div>
+            } }
+          </div>
+
+          <!-- Username Field -->
+          <div class="mb-3">
+            <label for="username" class="form-label fw-medium">Username:</label>
+            <input
+              type="text"
+              id="username"
+              formControlName="username"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid':
+                  formControls['username'].touched &&
+                  formControls['username'].invalid
+              }"
+              placeholder="Enter your username"
+            />
+            <!-- Validation Messages for Username -->
+            @if(formControls['username'].touched &&
+            formControls['username'].invalid) {
+            @if(formControls['username'].hasError('required')) {
+            <div class="invalid-feedback">Username is required.</div>
+            } @if(formControls['username'].hasError('whitespace')) {
+            <div class="invalid-feedback">Username cannot contain spaces.</div>
+            } }
+          </div>
+
+          <!-- Email Field -->
+          <div class="mb-3">
+            <label for="email" class="form-label fw-medium">Email:</label>
+            <input
+              type="email"
+              id="email"
+              formControlName="email"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid':
+                  formControls['email'].touched && formControls['email'].invalid
+              }"
+              placeholder="Enter your email"
+            />
+            <!-- Validation Messages for Email -->
+            @if(formControls['email'].touched && formControls['email'].invalid)
+            { @if(formControls['email'].hasError('required')) {
+            <div class="invalid-feedback">Email is required.</div>
+            } @if(formControls['email'].hasError('email')) {
+            <div class="invalid-feedback">Invalid email format.</div>
+            } }
+          </div>
+
+          <!-- Password Field -->
+          <div class="mb-3">
+            <label for="password" class="form-label fw-medium">Password:</label>
+            <input
+              type="password"
+              id="password"
+              formControlName="password"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid':
+                  formControls['password'].touched &&
+                  formControls['password'].invalid
+              }"
+              placeholder="Enter your password"
+            />
+            <!-- Validation Messages for Password -->
+            @if(formControls['password'].touched &&
+            formControls['password'].invalid) {
+            @if(formControls['password'].hasError('required')) {
+            <div class="invalid-feedback">Password is required.</div>
+            } @if(formControls['password'].hasError('minlength')) {
+            <div class="invalid-feedback">
+              Password must be at least 8 characters long.
+            </div>
+            } @if(formControls['password'].hasError('passwordStrength')) {
+            <div class="invalid-feedback">
+              Password must contain at least one uppercase letter, one lowercase
+              letter, one number, and one special character.
+            </div>
+            } }
+          </div>
+
+          <!-- Confirm Password Field -->
+          <div class="mb-4">
+            <label for="confirmPassword" class="form-label fw-medium"
+              >Confirm Password:</label
+            >
+            <input
+              type="password"
+              id="confirmPassword"
+              formControlName="confirmPassword"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid':
+                  formControls['confirmPassword'].touched &&
+                  formControls['confirmPassword'].invalid
+              }"
+              placeholder="Confirm your password"
+            />
+            <!-- Validation Messages for Confirm Password -->
+            @if(formControls['confirmPassword'].touched &&
+            formControls['confirmPassword'].invalid) {
+            @if(formControls['confirmPassword'].hasError('required')) {
+            <div class="invalid-feedback">Confirm Password is required.</div>
+            } } @if(registerForm.errors?.['passwordMismatch'] &&
+            formControls['confirmPassword'].touched) {
+            <div class="invalid-feedback">Passwords do not match.</div>
+            }
+          </div>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="btn btn-primary w-100 mb-3"
+            [disabled]="registerForm.invalid"
+          >
+            Register
+          </button>
+        </form>
+
+        <!-- Login Link -->
+        <div class="text-center mt-3">
+          <span class="text-muted">Already have an account?</span>
+          <a
+            class="text-primary fw-semibold text-decoration-none ms-2"
+            routerLink="/login"
+            >Login</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
