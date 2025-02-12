@@ -15,13 +15,13 @@
               class="form-control"
               [ngClass]="{
                 'is-invalid':
-                  formControls['name'].touched && formControls['name'].invalid
+                  (formControls['name'].touched || submitted) &&
+                  formControls['name'].invalid
               }"
               placeholder="Enter your name"
             />
-            <!-- Validation Messages for Name -->
-            @if(formControls['name'].touched && formControls['name'].invalid) {
-            @if(formControls['name'].hasError('required')) {
+            @if((formControls['name'].touched || submitted) &&
+            formControls['name'].invalid) { @if(formControls['name'].hasError('required')) {
             <div class="invalid-feedback">Name is required.</div>
             } }
           </div>
@@ -36,15 +36,13 @@
               class="form-control"
               [ngClass]="{
                 'is-invalid':
-                  formControls['username'].touched &&
+                  (formControls['username'].touched || submitted) &&
                   formControls['username'].invalid
               }"
               placeholder="Enter your username"
             />
-            <!-- Validation Messages for Username -->
-            @if(formControls['username'].touched &&
-            formControls['username'].invalid) {
-            @if(formControls['username'].hasError('required')) {
+            @if((formControls['username'].touched || submitted) &&
+            formControls['username'].invalid) { @if(formControls['username'].hasError('required')) {
             <div class="invalid-feedback">Username is required.</div>
             } @if(formControls['username'].hasError('whitespace')) {
             <div class="invalid-feedback">Username cannot contain spaces.</div>
@@ -61,13 +59,13 @@
               class="form-control"
               [ngClass]="{
                 'is-invalid':
-                  formControls['email'].touched && formControls['email'].invalid
+                  (formControls['email'].touched || submitted) &&
+                  formControls['email'].invalid
               }"
               placeholder="Enter your email"
             />
-            <!-- Validation Messages for Email -->
-            @if(formControls['email'].touched && formControls['email'].invalid)
-            { @if(formControls['email'].hasError('required')) {
+            @if((formControls['email'].touched || submitted) &&
+            formControls['email'].invalid) { @if(formControls['email'].hasError('required')) {
             <div class="invalid-feedback">Email is required.</div>
             } @if(formControls['email'].hasError('email')) {
             <div class="invalid-feedback">Invalid email format.</div>
@@ -84,15 +82,13 @@
               class="form-control"
               [ngClass]="{
                 'is-invalid':
-                  formControls['password'].touched &&
+                  (formControls['password'].touched || submitted) &&
                   formControls['password'].invalid
               }"
               placeholder="Enter your password"
             />
-            <!-- Validation Messages for Password -->
-            @if(formControls['password'].touched &&
-            formControls['password'].invalid) {
-            @if(formControls['password'].hasError('required')) {
+            @if((formControls['password'].touched || submitted) &&
+            formControls['password'].invalid) { @if(formControls['password'].hasError('required')) {
             <div class="invalid-feedback">Password is required.</div>
             } @if(formControls['password'].hasError('minlength')) {
             <div class="invalid-feedback">
@@ -118,28 +114,24 @@
               class="form-control"
               [ngClass]="{
                 'is-invalid':
-                  formControls['confirmPassword'].touched &&
-                  formControls['confirmPassword'].invalid
+                  (formControls['confirmPassword'].touched || submitted) &&
+                  (formControls['confirmPassword'].invalid ||
+                    registerForm.errors?.['passwordMismatch'])
               }"
               placeholder="Confirm your password"
             />
-            <!-- Validation Messages for Confirm Password -->
-            @if(formControls['confirmPassword'].touched &&
+            @if((formControls['confirmPassword'].touched || submitted) &&
             formControls['confirmPassword'].invalid) {
             @if(formControls['confirmPassword'].hasError('required')) {
             <div class="invalid-feedback">Confirm Password is required.</div>
             } } @if(registerForm.errors?.['passwordMismatch'] &&
-            formControls['confirmPassword'].touched) {
+            (formControls['confirmPassword'].touched || submitted)) {
             <div class="invalid-feedback">Passwords do not match.</div>
             }
           </div>
 
           <!-- Submit Button -->
-          <button
-            type="submit"
-            class="btn btn-primary w-100 mb-3"
-            [disabled]="registerForm.invalid"
-          >
+          <button type="submit" class="btn btn-primary w-100 mb-3">
             Register
           </button>
         </form>
@@ -147,9 +139,7 @@
         <!-- Login Link -->
         <div class="text-center mt-3">
           <span class="text-muted">Already have an account?</span>
-          <a
-            class="text-primary fw-semibold text-decoration-none ms-2"
-            routerLink="/login"
+          <a class="text-primary fw-semibold text-decoration-none ms-2" routerLink="/login"
             >Login</a
           >
         </div>
