@@ -1,0 +1,19 @@
+<!-- counter-component.component.html -->
+<div class="d-flex align-items-center">
+    <button
+      class="btn btn-outline-secondary"
+      (click)="decreaseCounter()"
+      [disabled]="product.quantity <= 1"
+    >
+      -
+    </button>
+    <p class="my-0 mx-2">{{ product.quantity }}</p>
+    <button
+      class="btn btn-outline-primary"
+      (click)="increaseCounter()"
+      [disabled]="product.quantity >= product.stock"
+    >
+      +
+    </button>
+  </div>
+  

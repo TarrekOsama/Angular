@@ -1,10 +1,13 @@
-<div class="container my-4">
+<div class="container my-5">
+  <!-- Page Heading -->
   <h1 class="mb-4 text-center display-4 fw-bold text-primary">
     Welcome to Our Shopping Website
   </h1>
   <p class="text-center lead mb-5">
     Start browsing our amazing collection of products!
   </p>
+
+  <!-- Product Grid -->
   <div class="row g-4">
     @for (product of products; track product.id) {
       <div class="col-12 col-md-6 col-lg-4">
@@ -15,15 +18,32 @@
       </div>
     }
   </div>
-  <div class="pagination">
-    <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
-    @for (page of visiblePages; track page){    <button
-      (click)="goToPage(page)"
-      [class.active]="page === currentPage"
-    >
-      {{ page }}
-    </button>}
-    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
-  </div>
-  
-  
+
+  <!-- Pagination -->
+  <nav aria-label="Page navigation" class="d-flex justify-content-center mt-5">
+    <ul class="pagination">
+      <!-- Previous Button -->
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <button class="page-link" (click)="previousPage()" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </button>
+      </li>
+
+      <!-- Page Numbers -->
+      @for (page of visiblePages; track page) {
+        <li class="page-item" [class.active]="page === currentPage">
+          <button class="page-link" (click)="goToPage(page)">
+            {{ page }}
+          </button>
+        </li>
+      }
+
+      <!-- Next Button -->
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <button class="page-link" (click)="nextPage()" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+</div>

@@ -1,1 +1,67 @@
-<p>cart works!</p>
+<div class="container my-5">
+  <h2 class="mb-4">Cart</h2>
+  @if (cartItems.length > 0) {
+    <!-- Cart Table -->
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <!-- Table Header -->
+        <thead class="table-light">
+          <tr>
+            <th scope="col">Image</th>
+            <th scope="col">Product</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        
+        <!-- Table Body -->
+        <tbody>
+          @for (item of cartItems; track item.id) {
+            <tr>
+              <!-- Product Image -->
+              <td>
+                <img
+                  [src]="item.thumbnail"
+                  alt="{{ item.title }}"
+                  class="img-thumbnail"
+                  style="width: 50px; height: auto;"
+                />
+              </td>
+              
+              <!-- Product Title -->
+              <td>{{ item.title }}</td>
+              
+              <!-- Quantity Counter -->
+              <td>
+                <app-counter [product]="item"></app-counter>
+              </td>
+              
+              <!-- Price -->
+              <td>${{ item.price * item.quantity | number: '1.2-2' }}</td>
+              
+              <!-- Remove Button -->
+              <td>
+                <button class="btn btn-danger btn-sm" (click)="removeItem(item.id)">
+                  Remove
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Total Price -->
+    <div class="text-end mt-4">
+      <h4 class="fw-bold">
+        Total: ${{ getTotalPrice() | number: '1.2-2' }}
+      </h4>
+    </div>
+  } @else {
+    <!-- Empty Cart Message -->
+    <div class="alert alert-info" role="alert">
+      Your cart is empty.
+    </div>
+  }
+</div>
