@@ -3,11 +3,10 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CounterService } from '../services/counter.service.service';
 import { CounterComponentComponent } from "../counter/counter.component";
-import { DiscountPipe } from '../pipe/discount.pipe';
 
 @Component({
   selector: 'app-cart-page',
-  imports: [CommonModule, CounterComponentComponent,DiscountPipe],
+  imports: [CommonModule, CounterComponentComponent,],
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
