@@ -1,34 +1,17 @@
-/* product-list.component.css */
-.product-card {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 5px;
+/* Custom style for the active pagination button */
+.page-item.active .page-link {
+  background-color: #0d6efd; /* Bootstrap primary color */
+  border-color: #0d6efd;
 }
 
-.pagination {
-  display: flex;
-  justify-content: center; /* Align items to the left */
-  align-items: center; /* Vertically center items */
-  margin-top: 20px;
-  gap: 5px; /* Add space between buttons */
+/* Custom hover effect for pagination buttons */
+.page-link:hover {
+  background-color: #e9ecef; /* Light gray background on hover */
+  color: #0d6efd; /* Primary color for text */
 }
 
-.pagination button {
-  padding: 5px 10px;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  cursor: pointer;
-  font-size: 14px; /* Adjust font size */
-}
-
-.pagination button.active {
-  background-color: #007bff;
-  color: #fff;
-  border-color: #007bff;
-}
-
-.pagination button:disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
+/* Custom style for disabled pagination buttons */
+.page-item.disabled .page-link {
+  color: #6c757d; /* Bootstrap secondary color */
+  pointer-events: none; /* Disable click events */
 }

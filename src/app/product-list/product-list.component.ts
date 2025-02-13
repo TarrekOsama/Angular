@@ -16,7 +16,7 @@ export class ProductListComponent implements OnInit {
   itemsPerPage = 10; // Number of items per page
   totalProducts = 0; // Total number of products
   visiblePages: number[] = []; // Array of visible page numbers (e.g., [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-  maxVisiblePages = 10; // Maximum number of visible page numbers
+  maxVisiblePages = 20; // Maximum number of visible page numbers
 
   constructor(private productRequestService: ProductRequestService) {}
 

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { product } from '../../app/models/product.model';
 import { Router } from '@angular/router';
 import { DiscountPipe } from '../pipe/discount.pipe';
+import { CounterService } from '../services/counter.service.service';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { DiscountPipe } from '../pipe/discount.pipe';
 export class ProductCardComponent {
 @Input() productItem!: product;
 
-
+constructor(private router: Router, private CounterService:CounterService) {}
 
   getStockStatus(stock: number): string {
     if (stock > 10) return 'In stock';
@@ -33,11 +34,13 @@ getStars(rating: number): number[] {
   return stars;
 }
 
-constructor(private router: Router) {}
 
 
 handleRedirectToDetails(id: number) {
   this.router.navigate(['/product' , id]);
 }
+ addToCart(){
+    this.CounterService.addToCart(this.productItem);  
+ }
 
 }
