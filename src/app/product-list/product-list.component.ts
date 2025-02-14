@@ -24,20 +24,18 @@ export class ProductListComponent implements OnInit {
     this.fetchProducts();
   }
 
-  // Fetch products for the current page
   fetchProducts() {
     const skip = (this.currentPage - 1) * this.itemsPerPage;
     this.productRequestService.getProductRequest(this.itemsPerPage, skip).subscribe(
       (res) => {
         this.products = res.products;
         this.totalProducts = res.total;
-        this.updateVisiblePages(); // Update visible pages after fetching products
+        this.updateVisiblePages(); 
       },
       (error) => console.error('Error fetching products', error)
     );
   }
 
-  // Go to the next page
   nextPage() {
     if (this.currentPage < this.totalPages) {
       this.currentPage++;
@@ -45,7 +43,6 @@ export class ProductListComponent implements OnInit {
     }
   }
 
-  // Go to the previous page
   previousPage() {
     if (this.currentPage > 1) {
       this.currentPage--;
@@ -53,7 +50,6 @@ export class ProductListComponent implements OnInit {
     }
   }
 
-  // Go to a specific page
   goToPage(page: number) {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
@@ -61,18 +57,15 @@ export class ProductListComponent implements OnInit {
     }
   }
 
-  // Calculate the total number of pages
   get totalPages(): number {
     return Math.ceil(this.totalProducts / this.itemsPerPage);
   }
 
-  // Update the visible pages array
   updateVisiblePages() {
     const halfRange = Math.floor(this.maxVisiblePages / 2);
     let startPage = Math.max(1, this.currentPage - halfRange);
     let endPage = Math.min(this.totalPages, startPage + this.maxVisiblePages - 1);
 
-    // Adjust startPage if endPage exceeds totalPages
     if (endPage - startPage + 1 < this.maxVisiblePages) {
       startPage = Math.max(1, endPage - this.maxVisiblePages + 1);
     }

@@ -1,45 +1,39 @@
-<body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
-    <div class="container">
-      <span class="navbar-brand fw-bold fs-4">Products App</span>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link text-dark fw-semibold" routerLink="/products"
-              >Product List</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-dark fw-semibold" routerLink="/register"
-              >Register</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-dark fw-semibold" routerLink="/login"
-              >Login</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link text-dark fw-semibold position-relative"
-              routerLink="/cart"
-            >
-              <i class="fa-solid fa-cart-shopping"></i>
-            </a>
-          </li>
-        </ul>
-      </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+  <div class="container">
+    <span class="navbar-brand fw-bold fs-4">Products App</span>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link text-dark fw-semibold" routerLink="/products">Product List</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark fw-semibold" routerLink="/register">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark fw-semibold" routerLink="/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark fw-semibold position-relative" routerLink="/cart">
+            <i class="fa-solid fa-cart-shopping"></i>
+            @if (cartItemCount > 0){
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{ cartItemCount }}
+              </span>
+            }
+          </a>
+        </li>
+      </ul>
     </div>
-  </nav>
-</body>
+  </div>
+</nav>
